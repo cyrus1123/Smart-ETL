@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llama3.1 Chat</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .chat-box { max-width: 600px; margin: auto; }
+        .message { margin: 10px 0; }
+        .bot { color: blue; }
+        .user { color: green; }
+    </style>
+</head>
+<body>
+    <div class="chat-box">
+        <h1>Chat with Llama3.1</h1>
+        <form id="chat-form">
+            <input type="text" id="user-input" name="user_input" placeholder="Type your question..." required>
+            <button type="submit">Send</button>
+        </form>
+        <div id="chat-log"></div>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const chatLog = document.getElementById('chat-log');
+
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const userInput = document.getElementById('user-input').value;
+            appendMessage('User', userInput, 'user');
+            document.getElementById('user-input').value = '';
+
+            fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ user_input: userInput })
+            }).then(response => {
+                const reader = response.body.getReader();
+                reader.read().then(function processText({ done, value }) {
+                    if (done) return;
+                    const text = new TextDecoder("utf-8").decode(value);
+                    const messages = text.split('\n\n').filter(msg => msg.startsWith('data:')).map(msg => msg.slice(5).trim());
+                    messages.forEach(msg => appendMessage('Bot', msg, 'bot'));
+                    reader.read().then(processText);
+                });
+            });
+        });
+
+        function appendMessage(sender, message, className) {
+            const messageElem = document.createElement('div');
+            messageElem.className = `message ${className}`;
+            messageElem.textContent = `${sender}: ${message}`;
+            chatLog.appendChild(messageElem);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    </script>
+</body>
+</html>
