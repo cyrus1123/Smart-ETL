@@ -1,0 +1,75 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen on Port",
+            "type": "jdk",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": "8000",
+            "listen": "true"
+        },
+        {
+            "type": "jdk",
+            "request": "launch",
+            "name": "Launch Java App"
+        },
+        {
+            "name": "Attach to Process",
+            "type": "jdk",
+            "request": "attach",
+            "processId": "${command:jdk.java.attachDebugger.pickProcess}"
+        },
+        {
+            "name": "Attach to Port",
+            "type": "jdk",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": "8000"
+        },
+        {
+            "type": "java",
+            "request": "attach",
+            "name": "Java",
+            "port": 5005,
+            "sourceRoots": []
+        },
+        {
+            "name": "Attach to Port",
+            "type": "jdk",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": "8000"
+        },
+        {
+            "name": "Listen on Port",
+            "type": "java",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 8000
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Launch Java App",
+            "mainClass": "com.example.Main", // Replace with your actual main class
+            "projectName": "YourProjectName" // Replace with your project name if needed
+        },
+        {
+            "name": "Attach to Process",
+            "type": "java",
+            "request": "attach",
+            "processId": "${command:pickJavaProcess}"
+        },
+        {
+            "name": "Attach to Port",
+            "type": "java",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 8000
+        }
+    ]
+}
