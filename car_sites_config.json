@@ -1,0 +1,30 @@
+{
+    "websites": [
+      {
+        "name": "ExampleCarSite1",
+        "url_template": "https://examplecarsite1.com/used-cars?page={page}",
+        "num_pages": 5,
+        "listing_selector": "div.car-listing",
+        "field_selectors": {
+          "title": "h2.car-title",
+          "price": "span.price",
+          "year": "span.year",
+          "mileage": "span.mileage",
+          "location": "span.location"
+        }
+      },
+      {
+        "name": "ExampleCarSite2",
+        "url_template": "https://examplecarsite2.com/listings/page-{page}",
+        "num_pages": 3,
+        "listing_selector": "article.vehicle",
+        "field_selectors": {
+          "title": "h3.vehicle-title",
+          "price": "div.vehicle-price",
+          "year": "span.vehicle-year",
+          "mileage": "span.vehicle-mileage",
+          "location": "div.vehicle-location"
+        }
+      }
+    ]
+  }
